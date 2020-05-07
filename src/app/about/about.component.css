@@ -1,0 +1,17 @@
+
+#intro {
+    height: 80vh;
+    width: 102vw;
+    margin-top: -100px !important;
+    margin-left: -30px !important;
+    margin-bottom: 50px !important;
+}
+
+#intro {
+    background: url("https://i.postimg.cc/wjvYP1tF/Untitled-design.png") no-repeat center bottom;
+    background-size: cover !important;
+}
+
+.header {
+    color: #4d4838;
+}

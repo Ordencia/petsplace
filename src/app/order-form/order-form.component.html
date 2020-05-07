@@ -1,0 +1,96 @@
+<div *ngIf="order$ | async as order">
+    <div class="row">
+        <div class="col-6">
+            <h2 style="padding-bottom:10px">Order Info</h2>
+            <table class="table">
+                <thead>
+                    <tr> 
+                        <th></th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of order.items">
+                        <td>
+                            <div [style.backgroundImage]="'url(' + item.product.imageUrl + ')'" class="thumbnail" alt=""></div>
+                        </td>
+                        <td>
+                            {{ item.product.title }}
+                        </td>
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+                        <td>
+                            {{ item.totalPrice | currency:'CAD':true }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{ order.total | currency:'CAD':true }}</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <form #f="ngForm" (ngSubmit)="updateStatusOrComment(f.value)">
+                <div class="form-group">
+                    <label for="status">
+                        Status
+                    </label>
+                    <select *ngIf="isAdmin; else userStatus" #status="ngModel" [(ngModel)]="update.status" name="status" id="status" class="form-control">
+                        <option value=""></option>
+                        <option *ngFor="let s of statusCategories$ | async" [value]="s.payload.exportVal().name">
+                            {{ s.payload.exportVal().name }}
+                        </option>
+                    </select>
+                    <ng-template #userStatus>
+                        <input #status="ngModel" [(ngModel)]="update.status" name="status" id="status" type="text" class="form-control" readonly>
+                    </ng-template>
+                </div>
+                <div class="form-group">
+                    <label for="comments">
+                        Comments
+                    </label>
+                    <textarea #comments="ngModel" [(ngModel)]="update.comments" name="comments" id="comments" type="text" class="form-control" rows="5"></textarea>
+                </div>
+                <div *ngIf="isAdmin; else isUser">
+                    <button [disabled]="f.pristine || order.orderStatus.completed" class="btn btn-custom">Save</button>
+                </div>
+                <ng-template #isUser>
+                    <button [disabled]="f.pristine || order.orderStatus.completed" class="btn btn-custom">Submit</button>
+                    <div class="divider"></div>
+                    <button *ngIf="!update.completed" (click)="completeOrder()" class="btn btn-secondary-custom">Order Completed</button>
+                </ng-template>
+            </form>
+        </div>
+        <div class="col-6">
+            <h2>Shipping Info</h2>
+            <form #form="ngForm">
+                <div class="form-group">
+                  <label for="">Name</label>
+                  <input #name="ngModel" name="name" [(ngModel)]="order.shipping.name" type="text" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="">Address</label>
+                  <input #addressLine1="ngModel" name="addressLine1" [(ngModel)]="order.shipping.addressLine1" type="text" class="form-control" placeholder="Line 1" readonly>
+                </div>
+                <div *ngIf="order.shipping.addressLine2" class="form-group">
+                  <label for=""></label>
+                  <input #addressLine2="ngModel" name="addressLine2" [(ngModel)]="order.shipping.addressLine2" type="text" class="form-control" placeholder="Line 2" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="">City</label>
+                  <input #city="ngModel" name="city" [(ngModel)]="order.shipping.city" type="text" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="">Postal Code</label>
+                  <input #postalCode="ngModel" name="postalCode" [(ngModel)]="order.shipping.postalCode" type="text" class="form-control" readonly>
+                </div>
+            </form>  
+        </div>
+    </div>
+</div>

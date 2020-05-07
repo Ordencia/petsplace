@@ -1,0 +1,39 @@
+      <form #f="ngForm">
+          <div class="form-group">
+            <label for="">Name</label>
+            <input #name="ngModel" name="name" [(ngModel)]="shipping.name" type="text" class="form-control" required>
+            <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+              <div *ngIf="name.errors.required">Name is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Address</label>
+            <input #addressLine1="ngModel" name="addressLine1" [(ngModel)]="shipping.addressLine1" type="text" class="form-control" placeholder="Line 1" required>
+            <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
+              <div *ngIf="addressLine1.errors.required">Address Line 1 is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for=""></label>
+            <input #addressLine2="ngModel" name="addressLine2" [(ngModel)]="shipping.addressLine2" type="text" class="form-control" placeholder="Line 2">
+          </div>
+          <div class="form-group">
+            <label for="">City (We don't ship outside of GTA, sorry for the inconvience!)</label>
+            <input #city="ngModel" name="city" [(ngModel)]="shipping.city" type="text" class="form-control" required>
+            <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+              <div *ngIf="city.errors.required">City is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Postal Code</label>
+            <input #postalCode="ngModel" name="postalCode" [(ngModel)]="shipping.postalCode" type="text" class="form-control" required minlength="6">
+            <div class="alert alert-danger" *ngIf="postalCode.touched && postalCode.invalid">
+              <div *ngIf="postalCode.errors.required">Postal Code is required.</div>
+              <div *ngIf="postalCode.errors.minlength">Postal Code is invalid, please enter a longer postal code</div>
+            </div>
+          </div>
+          <button
+            [disabled]="f.invalid"
+            (click)="placeOrder()"
+            class="btn btn-custom">Place Order</button>
+      </form>

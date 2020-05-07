@@ -1,0 +1,12 @@
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.navbar {
+    margin-bottom: 0 !important;
+    background-color: linen !important; 
+}
+
+.container-fluid {
+    margin-bottom: 0 !important;
+}

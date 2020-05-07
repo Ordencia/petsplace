@@ -1,0 +1,12 @@
+
+.quantity-container {
+    position: relative;
+    text-align: center;
+}
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(0, -50%);
+}
