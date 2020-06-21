@@ -8,6 +8,13 @@ Visit us at [petsplace-demo.web.app](https://petsplace-demo.web.app)
 
 This app was built with Angular, Firebase, and Bootstrap 4.
 
+## What I leanred
+- Built a fully functional, serverless e-shop web application featuring user authentication, product catalogue, shopping cart, and check out modules; supported order-tracking and product management functions for admin users
+
+- Implemented routing, product forms, and order logs with Angular; styled UI elements and added filtering logic with Bootstrap 4 and Angular Material
+
+- Leveraged Firebase to support authentication and utilized Angular to fetch and load data asynchronously from Firebase Realtime Database to enhance website responsiveness
+
 ## Demo
 Home Page:
 ![](Demo/home_page.png)
